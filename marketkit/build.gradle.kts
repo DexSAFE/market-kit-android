@@ -6,6 +6,16 @@ plugins {
     id("maven-publish")
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+            }
+        }
+    }
+}
+
 android {
     namespace = "io.dexnet.marketkit"
     compileSdk = 34
@@ -57,14 +67,4 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit2.converter.scalars)
     implementation(libs.gson)
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-            }
-        }
-    }
 }
